@@ -211,14 +211,21 @@ async function addVisitor(visitor: Visitor): Promise<boolean | undefined>  {
 async function requestHandler(req: NextApiRequest, res: NextApiResponse<IResponseData>) {
 
 
-    let v1 = await findVisitor('d933e99b-e548-457e-9f13-3ea40cf40621');
-    let v2 = await findVisitor('ed484aaf-497f-4bbe-a347-33b0d3e81a57');
+    let v1 = new Visitor();
+    let v2 = new Visitor();
+    v1.createNewSession();
+    v1.createNewSession()
+    v2.createNewSession();
+    v2.createNewSession();
+    v2.createNewSession();
+    await addVisitor(v1);
+    await addVisitor(v2);
 
-    console.log("v1:");
-    console.log(v1);
+    let d1 = await findVisitor(v1.visitorId);
+    let d2 = await findVisitor(v2.visitorId);
 
-    console.log("v2:");
-    console.log(v2);
+    console.log(d1);
+    console.log(d2);
 
     res.status(200).json({ jwt: 'John Doe' })
 
