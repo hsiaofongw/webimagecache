@@ -7,7 +7,12 @@ import React from 'react'
 class Home extends React.Component<IHomeProps, {}> {
 
     render() {
-        return <div><h1>Hello Next.js</h1></div>;
+        return <div>
+            <Head>
+                <script src="/trackcode.js" />
+            </Head>
+            <h1>Hello Next.js</h1>
+        </div>;
     }
 }
 
