@@ -49,6 +49,11 @@ async function requestHandler(req: NextApiRequest, res: NextApiResponse) {
     })
     .then(buf => {
         console.log(`link: ${link}, Returning...`);
+
+        const cacheDays = 3;
+        const cacheSeconds = 60 * 60 * 24 * cacheDays;
+
+        res.setHeader("Cache-Control", `public,max-age=${cacheSeconds}`);
         res.setHeader("Content-Type", "image/webp");
         res.status(200).send(buf);
     })
