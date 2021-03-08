@@ -9,7 +9,9 @@ async function requestHandler(req: NextApiRequest, res: NextApiResponse) {
     console.log(`link: ${link}`);
 
     const encodedLink = encodeURIComponent(link);
-    const apiEndPoint = "https://render-tron.appspot.com/screenshot/";
+    // const apiEndPoint = "https://render-tron.appspot.com/screenshot/";
+    // const apiEndPoint = "http://localhost:3002/screenshot/";
+    const apiEndPoint = "https://webcapture.exploro.one/screenshot/";
     const requestURI = `${apiEndPoint}${encodedLink}`;
     const url = new URL(requestURI);
 
