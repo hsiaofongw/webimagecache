@@ -52,7 +52,9 @@ async function requestHandler(req: NextApiRequest, res: NextApiResponse) {
         res.status(500).json({
             "msg": "Internal Error",
             "detail": `${e}`,
-            "avatarLink": link
+            "avatarLink": link,
+            "errorCode": e.code,
+            "errorName": e.name
         });
     });
 }
