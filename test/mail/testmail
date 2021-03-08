@@ -1,0 +1,318 @@
+From notifications@github.com Sun Mar 07 23:17:31 2021
+Delivered-To: hsiaofong.w@gmail.com
+Received: by 2002:a67:b145:0:0:0:0:0 with SMTP id z5csp1094780vsl;
+        Sun, 7 Mar 2021 07:17:31 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJyig2dsHSnmOD3sms9J+PHUQoK0fGMOt+O24s5g+5iBE7AkHuTw1R4se7xMzxbeKCziQuEY
+X-Received: by 2002:a37:7ac3:: with SMTP id v186mr16324303qkc.211.1615130251197;
+        Sun, 07 Mar 2021 07:17:31 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1615130251; cv=none;
+        d=google.com; s=arc-20160816;
+        b=o2FvAUKsr4k0ijlXEa2EIjOjgQyt+k1G7nQ+3qz1wS6BHWUz3NFEX1dd+r4QFdLU18
+         PN98fBqXi2hXylhwTAMROC1yITjOCicDFvBAqab0tWTDJM9TPMtvEY1O9eL4Ycfp5NOR
+         9YjUhTOBLBGSQ+fI7bsJ97I1WydzGOqZ3n2y/egVSb4rbjmpukouTN03JWClbdZdUiCQ
+         Zo0wxVdEjDQYej4fisjth5whEgXc2//rx1Ry58PaVn16PdNekBpoEE7NZRijSgZwrNXN
+         uxJNcwjzlQhVcXssEgXApNoFmRY/QFPOMgeq79VxQ3L2tAT2yXfALeNFm0Xv2LHstHQ3
+         3P2A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=list-unsubscribe:list-post:list-archive:list-id:precedence
+         :content-transfer-encoding:mime-version:subject:references
+         :in-reply-to:message-id:cc:to:reply-to:from:date:dkim-signature;
+        bh=hf63CAJkoM/MI4gEBS9DyLs6sVZl8a7lm+V1tBkY5w8=;
+        b=exvSP9bdRb8WLhUfO/DYdG+wp8FR8JJrOmi5OcNa0XTKdnZxhl5ihZ+GDbiDMdwAFw
+         6JR5bRvgxtjP8ABN4ynTA2QbiVIUxn84NCqYOvepVUaXzMrLQmbkgmNdB5j6ss1mlL1u
+         o2X2EWmSsEeCgQYO0WyniWk2HpgKpmbEvf9Z4IyfyhUXFSfTT2I2RG5sDeZYgneBZNtr
+         St691b0VZVNibde869goUG1eayWIBBo4AA94R/ZsxYT/3+fGV1NTXbZcv+BNBJXjyx+J
+         5C5wRovMZXFIaIpecxcr4TQUANYduC0heK6wfnFDMVFPxlcNf2TVg9Bc3S6loNFlJsfY
+         bCzw==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@github.com header.s=pf2014 header.b=nW6odpR8;
+       spf=pass (google.com: domain of noreply@github.com designates 192.30.252.200 as permitted sender) smtp.mailfrom=noreply@github.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=github.com
+Return-Path: <noreply@github.com>
+Received: from smtp.github.com (out-17.smtp.github.com. [192.30.252.200])
+        by mx.google.com with ESMTPS id f128si4435750qkd.180.2021.03.07.07.17.31
+        for <hsiaofong.w@gmail.com>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Sun, 07 Mar 2021 07:17:31 -0800 (PST)
+Received-SPF: pass (google.com: domain of noreply@github.com designates 192.30.252.200 as permitted sender) client-ip=192.30.252.200;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@github.com header.s=pf2014 header.b=nW6odpR8;
+       spf=pass (google.com: domain of noreply@github.com designates 192.30.252.200 as permitted sender) smtp.mailfrom=noreply@github.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=github.com
+Received: from github.com (hubbernetes-node-2bd5881.va3-iad.github.net [10.48.19.52])
+	by smtp.github.com (Postfix) with ESMTPA id EDF535C05BD
+	for <hsiaofong.w@gmail.com>; Sun,  7 Mar 2021 07:17:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=github.com;
+	s=pf2014; t=1615130251;
+	bh=hf63CAJkoM/MI4gEBS9DyLs6sVZl8a7lm+V1tBkY5w8=;
+	h=Date:From:Reply-To:To:Cc:In-Reply-To:References:Subject:List-ID:
+	 List-Archive:List-Post:List-Unsubscribe:From;
+	b=nW6odpR87dDQlXrK+dB6Xyp98oLMRvaZKtXRkS32E6eQPPkMMBSl6ALXTiEEcF9q/
+	 Lt4H+U2bECPnJ9TTBQKusMYgnq74kiGbVAKpb40kp3BevannLrnt2NV+y9+2Kzh8Ft
+	 QE0vt6qyHgojxOViGFfvfXMf4PGsuhK8UC6bLRa8=
+Date: Sun, 07 Mar 2021 07:17:30 -0800
+From: "vercel[bot]" <notifications@github.com>
+Reply-To: hsiaofongw/blog-ng-nextjs <reply+AA62BV3ZFDPMWW76TMQH6WV6KDHYVEVBMPHAFW6UHA@reply.github.com>
+To: hsiaofongw/blog-ng-nextjs <blog-ng-nextjs@noreply.github.com>
+Cc: hsiaofongw <hsiaofong.w@gmail.com>, 
+ Author <author@noreply.github.com>
+Message-ID: <hsiaofongw/blog-ng-nextjs/commit/a2cf1208677f9a9c7c32bc31bcb58ce602d35439/47961144@github.com>
+In-Reply-To: <hsiaofongw/blog-ng-nextjs/commit/a2cf1208677f9a9c7c32bc31bcb58ce602d35439@github.com>
+References: <hsiaofongw/blog-ng-nextjs/commit/a2cf1208677f9a9c7c32bc31bcb58ce602d35439@github.com>
+Subject: Re: [hsiaofongw/blog-ng-nextjs] update (a2cf120)
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--==_mimepart_6044ee8ae9455_4e8917c0182087";
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+Precedence: list
+X-GitHub-Sender: vercel[bot]
+X-GitHub-Recipient: hsiaofongw
+X-GitHub-Reason: author
+List-ID: hsiaofongw/blog-ng-nextjs <blog-ng-nextjs.hsiaofongw.github.com>
+List-Archive: https://github.com/hsiaofongw/blog-ng-nextjs
+List-Post: <mailto:reply+AA62BV3ZFDPMWW76TMQH6WV6KDHYVEVBMPHAFW6UHA@reply.github.com>
+List-Unsubscribe: <mailto:unsub+AA62BV3ZFDPMWW76TMQH6WV6KDHYVEVBMPHAFW6UHA@reply.github.com>,
+ <https://github.com/notifications/unsubscribe/AA62BVZLFTHBHKOAYXKV353TCOKIVANCNFSM4YX6OSAQ>
+X-Auto-Response-Suppress: All
+X-GitHub-Recipient-Address: hsiaofong.w@gmail.com
+
+
+----==_mimepart_6044ee8ae9455_4e8917c0182087
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Successfully deployed to the following URLs:
+
+* [exploro.vercel.app](https://exploro.vercel.app)  
+* [exploro-hsiaofongw.vercel.app](https://exploro-hsiaofongw.vercel.app)  
+* [exploro-git-main-hsiaofongw.vercel.app](https://exploro-git-main-hsiaofongw.vercel.app)  
+* [exploro.one](https://exploro.one)
+
+-- 
+You are receiving this because you authored the thread.
+Reply to this email directly or view it on GitHub:
+https://github.com/hsiaofongw/blog-ng-nextjs/commit/a2cf1208677f9a9c7c32bc31bcb58ce602d35439#commitcomment-47961144
+----==_mimepart_6044ee8ae9455_4e8917c0182087
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p></p>
+<p>Successfully deployed to the following URLs:</p>
+<ul>
+<li><a href="https://exploro.vercel.app" rel="nofollow">exploro.vercel.app</a></li>
+<li><a href="https://exploro-hsiaofongw.vercel.app" rel="nofollow">exploro-hsiaofongw.vercel.app</a></li>
+<li><a href="https://exploro-git-main-hsiaofongw.vercel.app" rel="nofollow">exploro-git-main-hsiaofongw.vercel.app</a></li>
+<li><a href="https://exploro.one" rel="nofollow">exploro.one</a></li>
+</ul>
+
+<p style="font-size:small;-webkit-text-size-adjust:none;color:#666;">&mdash;<br />You are receiving this because you authored the thread.<br />Reply to this email directly, <a href="https://github.com/hsiaofongw/blog-ng-nextjs/commit/a2cf1208677f9a9c7c32bc31bcb58ce602d35439#commitcomment-47961144">view it on GitHub</a>, or <a href="https://github.com/notifications/unsubscribe-auth/AA62BV4SFLLFAUHF63ISKLLTCOKIVANCNFSM4YX6OSAQ">unsubscribe</a>.<img src="https://github.com/notifications/beacon/AA62BV4TDMPYP344MVX34Y3TCOKIVA5CNFSM4YX6OSA2YY3PNVWWK3TUL52HS4DFVVBW63LNNF2EG33NNVSW45FKMNXW23LFNZ2F62LEZYBNXVBY.gif" height="1" width="1" alt="" /></p>
+<script type="application/ld+json">[
+{
+"@context": "http://schema.org",
+"@type": "EmailMessage",
+"potentialAction": {
+"@type": "ViewAction",
+"target": "https://github.com/hsiaofongw/blog-ng-nextjs/commit/a2cf1208677f9a9c7c32bc31bcb58ce602d35439#commitcomment-47961144",
+"url": "https://github.com/hsiaofongw/blog-ng-nextjs/commit/a2cf1208677f9a9c7c32bc31bcb58ce602d35439#commitcomment-47961144",
+"name": "View Commit"
+},
+"description": "View this Commit on GitHub",
+"publisher": {
+"@type": "Organization",
+"name": "GitHub",
+"url": "https://github.com"
+}
+}
+]</script>
+----==_mimepart_6044ee8ae9455_4e8917c0182087--
+
+From noreply-analytics@google.com Sun Mar 07 23:01:55 2021
+Delivered-To: hsiaofong.w@gmail.com
+Received: by 2002:a67:b145:0:0:0:0:0 with SMTP id z5csp1083590vsl;
+        Sun, 7 Mar 2021 07:01:55 -0800 (PST)
+X-Received: by 2002:a92:da48:: with SMTP id p8mr15884754ilq.137.1615129315206;
+        Sun, 07 Mar 2021 07:01:55 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1615129315; cv=none;
+        d=google.com; s=arc-20160816;
+        b=mWSLxS7W0jjfQsVFz5qIOh/W3hY4PjKFWy+OTP21+sbMuStUOGg3HrQL2qj1flUgrf
+         dT4Wl1D9QDE0vXHH69jmreKAy7fTq8IBh1Ul+zUH5/qYXWB31rM90scu+LHI16P0HXlL
+         OAJ1lcxbDucCgo7YIUfXXZRZX5bAX6FI2MXFKsC6EeMGzIpT8DTvMmlbF3N/PnVOxoWS
+         1yz1BdUKby4O7ND9Il45hFnLvYC/zkk2gHC+yxCHFKBRJtSFQkXeLdSWK1YFy4vwH0k7
+         vAQEPMBdZe1tyxJw16lbQFgoCI5W98ResDCce6p8p2egRohu/7W6DsqDiJTKK3Wrwxpv
+         gF4A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:from:subject:date:message-id:mime-version:dkim-signature;
+        bh=rn0bGZSUzpUG8y6wHDOzo2twDPeew5Wdpj4gXf+kmpQ=;
+        b=VY0tBjUOIyN+UlJEMp6vvjsbaH5+Vfau9GGpxbbBeSlS4iGpq4gf9vIAgykDK1qxrG
+         aoBQvZZ0yywQouSqwC5a+d1tr7hy0a4RBdizZWW3UBKR4sBTrrU9DPF1T5DDfZ5ozXtz
+         JNqkJFmv3QUK+6lqNxny2tIhsQmqvW+7isiEef3iNjYr+NPCyNESyZZFb9+az+dQJMvU
+         BpX0C404NRUSksUJjmAJjcKWvePYLup2KtL36Wg+/VwIMFdFMzPGahUrOWHGt4/gHqC6
+         63bIJAzO88OMgv41iKUprQFuFcUWBHk21iGb3olrIUUvGRcwXr7/kn7is/wLLkTsVoaP
+         Ou4A==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@google.com header.s=20161025 header.b=XkzV+Wdt;
+       spf=pass (google.com: domain of 34upeybekc9mcdg3ean-zczani71h5dd5a3.1db6h7zd4dc5.l5bz7a.1db@analytics.bounces.google.com designates 209.85.220.73 as permitted sender) smtp.mailfrom=34upEYBEKC9MCDG3EAN-zCzANI71H5DD5A3.1DB6H7zD4DC5.L5Bz7A.1DB@analytics.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com
+Return-Path: <34upEYBEKC9MCDG3EAN-zCzANI71H5DD5A3.1DB6H7zD4DC5.L5Bz7A.1DB@analytics.bounces.google.com>
+Received: from mail-sor-f73.google.com (mail-sor-f73.google.com. [209.85.220.73])
+        by mx.google.com with SMTPS id k5sor4643933iol.72.2021.03.07.07.01.54
+        for <hsiaofong.w@gmail.com>
+        (Google Transport Security);
+        Sun, 07 Mar 2021 07:01:55 -0800 (PST)
+Received-SPF: pass (google.com: domain of 34upeybekc9mcdg3ean-zczani71h5dd5a3.1db6h7zd4dc5.l5bz7a.1db@analytics.bounces.google.com designates 209.85.220.73 as permitted sender) client-ip=209.85.220.73;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@google.com header.s=20161025 header.b=XkzV+Wdt;
+       spf=pass (google.com: domain of 34upeybekc9mcdg3ean-zczani71h5dd5a3.1db6h7zd4dc5.l5bz7a.1db@analytics.bounces.google.com designates 209.85.220.73 as permitted sender) smtp.mailfrom=34upEYBEKC9MCDG3EAN-zCzANI71H5DD5A3.1DB6H7zD4DC5.L5Bz7A.1DB@analytics.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=mime-version:message-id:date:subject:from:to;
+        bh=rn0bGZSUzpUG8y6wHDOzo2twDPeew5Wdpj4gXf+kmpQ=;
+        b=XkzV+WdtREOHmq/WANpkjWM0Yb8F9iBdNA8qrjMN688lgAO7RWRMKx+y/4yQZdELwF
+         Dbp5Lx+ICejojiFb6DFkKjlRoVOFKMILvfbTBCsHkqVlOQ67UtGM5wgNdedBfN6y6aZZ
+         vRVfr1377EEOk0j1r8yIdgSluAkzggqhX3NZ21UkV/EKaoG0UZTv37ff+z6stACnvnJQ
+         4xBC5oJDD2hh9i8udQ8CiucmuZWXoz6oIWDylO/LCLeEAGvDnlFCd8NEOoQ889Ohe+Jz
+         CtHw9Nk4TnDZoTCGZefam/X6V7+c3vWwKDv4LysapU8eCNotVVQPjaBM053FdQObrsuC
+         Fn8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:message-id:date:subject:from:to;
+        bh=rn0bGZSUzpUG8y6wHDOzo2twDPeew5Wdpj4gXf+kmpQ=;
+        b=q+hbJWgiZNeY55d9rmUWzFRIsiRsGPJURjPq7G2kAqddwO/F4fylP5cHD29QAXugKm
+         Rcfd7Aj8HCrc7NldGHOaTcP5i+5pXNXPl4ALEgG2gWxnKKIqXEjxKgn6Ko1bwZxElNLM
+         RLAIMoXNKPtXXt9UTSdu+cE3A52UpJBHmQx6j2VpCWMyXHIqHSTBE/K3VdAvRe5usnR7
+         eZjXIUsZ/8O6HmOPyZME4TtrRxOTeSvFjbfv6tTzf5YG0Frt+oJzbDFwMzN8jNPOGkUs
+         SNoqVZcJJLCC+MOWne2pvHKBz8Hk/P4ZR34ZbinsBrlz53M+Zgm8gHjOO7ev3u8y+PUx
+         dj9A==
+X-Gm-Message-State: AOAM533kyB6HV6zHBGHLza5Ijj8VTpPH4tx1GZhBebBQay3BWHP2F19E
+	cxaMmDgSdzZBfiYmFhOZmVRL7UBqYFwTjdUaBmVGDTLOsDZj0xJiYA==
+X-Google-Smtp-Source: ABdhPJwV7bniKG6h6BLNtLHfFhw0wssAmUdue0xYMCD66B+WuC/4Ks9dkSQKcxf1dgBfG/TGPBGBJK3KhlXQThAXBx0xvX9RhV7wwiY1X2bhEkvUpmI=
+MIME-Version: 1.0
+X-Received: by 2002:a5d:9e18:: with SMTP id h24mr5928456ioh.80.1615129314872;
+ Sun, 07 Mar 2021 07:01:54 -0800 (PST)
+Message-ID: <000000000000144f5805bcf3993c@google.com>
+Date: Sun, 07 Mar 2021 15:01:54 +0000
+Subject: Google Analytics account scheduled for deletion
+From: noreply-analytics@google.com
+To: hsiaofong.w@gmail.com
+Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
+
+Hello,
+
+We want to inform you that the Google Analytics account "aleaf.one  
+(UA-122831816)" was moved to the Trash Can by hsiaofong.w@gmail.com. It  
+will be permanently deleted in 35 days and cannot be restored after that  
+time. Learn more about Trash Can here:  
+https://support.google.com/analytics/answer/6154772
+
+If you believe this was in error, you can restore this account from the  
+Trash Can. Open the Trash Can in Google Analytics:  
+https://www.google.com/analytics/web/#management/Settings/a122831816w0p0/?m.page=AccountTrashCan
+
+This message was sent to all users with Edit access to this account.
+
+Sincerely,
+The Google Analytics Team
+
+This message was sent from a notification-only email address that does not  
+accept incoming email. Please do not reply to this message.
+
+From noreply@github.com Sun Mar 07 22:23:23 2021
+Delivered-To: hsiaofong.w@gmail.com
+Received: by 2002:a67:b145:0:0:0:0:0 with SMTP id z5csp1062906vsl;
+        Sun, 7 Mar 2021 06:23:23 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJyTuhuvhsJtTDrVKi4EquCGKgCeCieoDTSXSQZ+3W5CA8+0k9FTnvZZum0Bxz3adjEKIjfn
+X-Received: by 2002:a25:aa6d:: with SMTP id s100mr29441403ybi.523.1615127003291;
+        Sun, 07 Mar 2021 06:23:23 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1615127003; cv=none;
+        d=google.com; s=arc-20160816;
+        b=Geze1zcNZirG2qX4aTg4cH4bXVuRz+pofSz/eLDK0tjeNTo9/UjPQzOCDRJ/mNXm2e
+         wJwHMCRD+W0RAxFnD7YiTYgPvS7Djowm+kxZcCN5hyt12TvXc/hliI6iNElYZIOnJUAT
+         7Pr68zDyVmhCa8c8UDx9UsH5O5Qf0kmE4AO3s5MgldoEu3cQeJC/wpLE1DwtKweeYwjW
+         Ps7iNJF5xPzep8TiHSqB2rmaIGbr9CnVRZ+mqlnfkMbAur9Yv2OvWdi0r5xuJcKsYiou
+         ZxfNH5N0a+TipADjCQhmq36EGLQi1qbgn8EXJn1iUP8szVNB+kmaPsfsZgtaIcqKYNkj
+         ps6Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=categories:content-transfer-encoding:mime-version:subject
+         :message-id:to:from:date:dkim-signature:dkim-signature;
+        bh=tXRuV3gQLuFwjtmfQQO+/AVeBFbdLviQlCrqPY368x0=;
+        b=1KFp9mSqz6g74yPK89L04ZTL5YVHh1O2oPboeFBYQCCgpFb2oD1BcY+idb2MvHlTe0
+         QwO5jzOhZyZHz/sMiE5BIrdqPKGjF63P2duoSaPhfGyottPCsO4ZZIseHO3ta95+nqLg
+         XIbTDtcVhlBX9enlqo8RFDcKqF7KSWCJXLZ/L+PZXCrNLLiouwnZV1e4gSh1viRho8h/
+         n4vrZn23N0yz+rqkXcozo1/ED3S8woBVq4hfiIh4v9uSdcz3XAa1RWjZXCdpCKZ5iPaK
+         RDquGMEPmzlkjm3/c0KONxvQf4Qr6KTqfVvbRFuJIG4AuysCUSB0/y+pAmng+y4B1sWT
+         YZTQ==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@github.com header.s=s20150108 header.b=Jd05bDSt;
+       dkim=pass header.i=@sendgrid.info header.s=smtpapi header.b=ZiUiwZuF;
+       spf=pass (google.com: domain of bounces+848413-fa3e-hsiaofong.w=gmail.com@sgmail.github.com designates 192.254.112.99 as permitted sender) smtp.mailfrom="bounces+848413-fa3e-hsiaofong.w=gmail.com@sgmail.github.com";
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=github.com
+Return-Path: <bounces+848413-fa3e-hsiaofong.w=gmail.com@sgmail.github.com>
+Received: from o4.sgmail.github.com (o4.sgmail.github.com. [192.254.112.99])
+        by mx.google.com with ESMTPS id z4si9005548ybj.289.2021.03.07.06.23.23
+        for <hsiaofong.w@gmail.com>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Sun, 07 Mar 2021 06:23:23 -0800 (PST)
+Received-SPF: pass (google.com: domain of bounces+848413-fa3e-hsiaofong.w=gmail.com@sgmail.github.com designates 192.254.112.99 as permitted sender) client-ip=192.254.112.99;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@github.com header.s=s20150108 header.b=Jd05bDSt;
+       dkim=pass header.i=@sendgrid.info header.s=smtpapi header.b=ZiUiwZuF;
+       spf=pass (google.com: domain of bounces+848413-fa3e-hsiaofong.w=gmail.com@sgmail.github.com designates 192.254.112.99 as permitted sender) smtp.mailfrom="bounces+848413-fa3e-hsiaofong.w=gmail.com@sgmail.github.com";
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=github.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=github.com; 
+	h=from:to:subject:mime-version:content-type:content-transfer-encoding; 
+	s=s20150108; bh=tXRuV3gQLuFwjtmfQQO+/AVeBFbdLviQlCrqPY368x0=; b=
+	Jd05bDSt9f9TXEmg7KGHUCE2XIlz/iYU3vzPB7O2otEDurlc7Ygii+UN9Gytgdoy
+	HOIwYEfk5nEhSF0sQ6TTWLYQZEcvBOmPOSLwkRwJn5fsaglfxm39Guu2+3tDptZc
+	IBHUvylnaASU4SNR/NPbASudJPPDWKneuzctcOa7QMs=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; 
+	d=sendgrid.info; 
+	h=from:to:subject:mime-version:content-type:content-transfer-encoding:x-feedback-id; 
+	s=smtpapi; bh=tXRuV3gQLuFwjtmfQQO+/AVeBFbdLviQlCrqPY368x0=; b=Zi
+	UiwZuFqU3TZ5yF7FcgLKH2Kw9s7C4A0ZjhdF6d0FXgsZYQGPsL0EgIHJQa5zJbz7
+	f/MDa9MCJ90M+mY2WGzDZyfs2mC+Pdh+ZeU4+spyC/1JRVoO/yFYKlP1ECF7SsOg
+	wGLj/fH3LDbNh7kS9LKJlxqO5pjfdKAUK4PXaqm2w=
+Received: by filter2884p1mdw1.sendgrid.net with SMTP id filter2884p1mdw1-17986-6044E1DA-1B
+        2021-03-07 14:23:22.955011387 +0000 UTC m=+756627.154958195
+Received: from smtp.github.com (unknown)
+	by ismtpd0088p1mdw1.sendgrid.net (SG) with ESMTP id f4rV_Uj3SpiMU0qOy1LcDw
+	Sun, 07 Mar 2021 14:23:22.889 +0000 (UTC)
+Received: from github.com (hubbernetes-node-1cf6925.va3-iad.github.net [10.48.18.26])
+	by smtp.github.com (Postfix) with ESMTPA id 8F64B5C037A;
+	Sun,  7 Mar 2021 06:23:22 -0800 (PST)
+Date: Sun, 07 Mar 2021 14:23:22 +0000 (UTC)
+From: GitHub <noreply@github.com>
+To: hsiaofongw <hsiaofong.w@qq.com>
+Message-ID: <6044e1da8d5fb_4ec617c012723f@lowworker-55fc87b7c9-tdtz6.mail>
+Subject: [GitHub] A third-party OAuth application has been added to your
+ account
+Mime-Version: 1.0
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Auto-Response-Suppress: All
+categories: account-security,new-oauth-authorization
+X-SG-EID: ZdJegQ4Cnev3Sewfz/o2ydFS56baHizYHAqBV+M2mmAdkg1MQIMI4d2yp9NZUHTeRkoZZM3ACkFWQT
+ rUpLv6oqmvvkPrMHinAyl6hvTSrZcm70FKSRJSNvO9iDrkzxE8/UmdbF3sYOui4TpircnHHDz+SmiV
+ tMcJA3CL7cUYyHIrcVHw7vzuK1+F7zsuE8mFYC5zsvcrHWzS9Hk4NuXOdQ==
+X-SG-ID: HjuyJHjWedrv+ZABmVoKqJUGcbnIrpG8Dl8TZw63o/tYHvHAZuj7fE3sBkCPSNz92pSnrCLqO00MaT
+ UToqoVhg==
+X-Entity-ID: /f+S0XqulHHajbNb6hGdxg==
+X-Feedback-ID: 848413:6xvVEJqleZlAW7/vhv7PzD/cv5tamo2SWZDKyvugGvg=:/tVyTrc5pGf9LyskfwdeL8MHpmfxmY45w4+vOgpL1lE=:SG
+
+Hey hsiaofongw!
+
+
+
+A third-party OAuth application (Hashnode) with user:email scope was recently authorized to access your account.
+Visit https://github.com/settings/connections/applications/8cba307bd9ce5b29ceb9 for more information.
+
+To see this and other security events for your account, visit https://github.com/settings/security-log
+
+If you run into problems, please contact support by visiting https://github.com/contact
+
+Thanks,
+The GitHub Team
