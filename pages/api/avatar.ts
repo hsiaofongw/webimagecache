@@ -11,6 +11,8 @@ async function requestHandler(req: NextApiRequest, res: NextApiResponse) {
     const previewWidth = 60;
     const previewHeight = 60;
 
+    let fetchedBuffer: Buffer | undefined = undefined;
+
     await fetch(link)
     .then(blob => {
         console.log(`link: ${link}, Got response.`);
@@ -22,6 +24,7 @@ async function requestHandler(req: NextApiRequest, res: NextApiResponse) {
     })
     .then(buffer => {
         console.log(`link: ${link}, Got buffer, start sharping...`);
+        fetchedBuffer = buffer as Buffer;
         return sharp(buffer);
     })
     .then(s => {
@@ -49,13 +52,21 @@ async function requestHandler(req: NextApiRequest, res: NextApiResponse) {
     .catch(e => {
         console.log(`link: ${link}, There are error(s):`);
         console.log(e);
-        res.status(500).json({
+        const errorLog = {
             "msg": "Internal Error",
             "detail": `${e}`,
             "avatarLink": link,
             "errorCode": e.code,
             "errorName": e.name
-        });
+        };
+
+        if (fetchedBuffer) {
+            console.log(`link: ${link}, Returning fallback...`);
+            res.status(200).send(fetchedBuffer);
+        }
+        else {
+            res.status(500).json(errorLog);
+        }
     });
 }
 
