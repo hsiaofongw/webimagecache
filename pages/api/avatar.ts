@@ -51,7 +51,8 @@ async function requestHandler(req: NextApiRequest, res: NextApiResponse) {
         console.log(e);
         res.status(500).json({
             "msg": "Internal Error",
-            "detail": `${e}`
+            "detail": `${e}`,
+            "avatarLink": link
         });
     });
 }
