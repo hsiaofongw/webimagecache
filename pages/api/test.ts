@@ -1,12 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 import type { NextApiRequest, NextApiResponse } from 'next'
-import sharp from 'sharp';
+
 
 async function requestHandler(req: NextApiRequest, res: NextApiResponse) {
     
     const link = "https://exploro.one";
-    const api = "http://localhost:3000/api/preview";
+    const api = "https://websitepreview-git-main-hsiaofongw.vercel.app/api/preview";
     let url = new URL(api);
     url.searchParams.append("link", link);
     
