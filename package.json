@@ -13,9 +13,11 @@
     "next": "10.0.8",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "sharp": "^0.27.2",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/sharp": "^0.27.1",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/mongodb": "^3.6.9",
     "@types/node": "^14.14.32",
