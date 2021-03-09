@@ -1,34 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## 主要功能
 
-## Getting Started
+加速友链页面的头像加载．
 
-First, run the development server:
+## 工作方式
 
-```bash
-npm run dev
-# or
-yarn dev
+假如说一个头像的 URL 是：
+
+```
+https://somedomain.com/avatar.png
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+那么我们首先将它进行编码，具体编码方式是：
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```
+encodeURIComponent(`https://somedomain.com/avatar.png`)
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+得到
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
+https%3A%2F%2Fsomedomain.com%2Favatar.png
+```
 
-## Learn More
+然后将它作为参数传给本项目提供的 API: 
 
-To learn more about Next.js, take a look at the following resources:
+```
+/api/avatar?link=https%3A%2F%2Fsomedomain.com%2Favatar.png
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+本 API 就会返回一个 `image/webp` 类型的数据，可以将它作为头像使用．
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+为什么这样可以加速呢？
 
-## Deploy on Vercel
+首先可以将它部署在 Vercel 上，利用 Vercel 提供的 HTTP2 服务和全球 CDN 服务来实现加速；
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+其次我们默认将输出的图片的大小设为 60 乘 60, 格式为 WebP，所以体积更小，自然加载速度也就更快．
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 部署方式
+
+### 自有部署
+
+首先克隆到部署环境，然后：
+
+```
+cd webimagecache
+npm i
+npm run build
+npm run start
+```
+
+即可．
+
+### Vercel 部署
+
+Fork 一份本项目，或者克隆后上传至自己的仓库，然后打开 Vercel 官网，新建项目，按照提示操作即可．
